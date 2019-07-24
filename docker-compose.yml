@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  selenium-server:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
+    shm_size: 2g
+
+  cotoami:
+    image: cotoami/cotoami:v0.23.0
+    ports:
+      - "4000:4000"
+    environment:
+      SECRET_KEY_BASE: iirr+1hGL0ew7N/jQmnQ2crnwBBwjHWPkM/QZk7tmD8/ARQhvAH4j69wh1WHH7gv
+      COTOAMI_URL_SCHEME: http
+      COTOAMI_URL_HOST: cotoami
+      COTOAMI_URL_PORT: "4000"
+      COTOAMI_REDIS_HOST: redis
+      COTOAMI_REPO_USER: postgres
+      COTOAMI_REPO_PASSWORD: postgres
+      COTOAMI_REPO_DATABASE: cotoami
+      COTOAMI_REPO_HOST: postgres
+      COTOAMI_NEO4J_HOST: neo4j
+      COTOAMI_SMTP_SERVER: maildev
+      COTOAMI_SMTP_PORT: "25"
+      COTOAMI_EMAIL_FROM: no-reply@cotoa.me
+
+  redis:
+    image: redis:alpine
+
+  postgres:
+    image: postgres:9.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cotoami
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  neo4j:
+    image: neo4j:3.2.2
+    environment:
+      NEO4J_AUTH: none
+    volumes:
+      - neo4j-data:/data 
+
+  maildev:
+    image: djfarrelly/maildev:latest
+    ports:
+      - "8080:80"
+
+volumes:
+  postgres-data:
+  neo4j-data:
