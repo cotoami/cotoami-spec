@@ -7,15 +7,14 @@ else
 fi
 
 
-# Containers
+# Run containers
 export COMPOSE_PROJECT_NAME=cotoami-spec
 docker-compose up -d
 
 
 # Make sure to tear down the containers
 function tear_down_containers() {
-  echo
-  echo "# Tearing down containers..."
+  echo "Tearing down containers..."
   docker-compose down -v
 }
 trap tear_down_containers 0 1 2 3 15
