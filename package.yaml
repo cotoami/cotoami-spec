@@ -21,6 +21,16 @@ description:         Please see the README on GitHub at <https://github.com/maru
 
 dependencies:
 - base >= 4.7 && < 5
+- QuickCheck
+- hspec
+- webdriver
+- lifted-base
+- transformers
+- data-default
+- text
+- HUnit
+- aeson
+- hspec-core
 
 library:
   source-dirs: src
