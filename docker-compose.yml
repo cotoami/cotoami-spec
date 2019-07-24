@@ -6,11 +6,16 @@ services:
     ports:
       - "4444:4444"
     shm_size: 2g
+    depends_on:
+      - cotoami
 
   cotoami:
     image: cotoami/cotoami:v0.23.0
-    ports:
-      - "4000:4000"
+    depends_on:
+      - redis
+      - postgres
+      - neo4j
+      - maildev
     environment:
       SECRET_KEY_BASE: iirr+1hGL0ew7N/jQmnQ2crnwBBwjHWPkM/QZk7tmD8/ARQhvAH4j69wh1WHH7gv
       COTOAMI_URL_SCHEME: http
