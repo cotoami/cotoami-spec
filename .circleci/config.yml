@@ -2,10 +2,11 @@ version: 2
 jobs:
   run-spec:
     machine: true
-    environment:
-      IMAGE_NAME: "cotoami/cotoami-elixir:1.7"
     steps:
       - checkout
+      - run:
+          name: Install stack
+          command: curl -sSL https://get.haskellstack.org/ | sh
       - run:
           name: Run spec
           command: ./run-spec-with-docker.sh

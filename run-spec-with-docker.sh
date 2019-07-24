@@ -7,6 +7,7 @@ elif [ -x "$(command -v docker-machine)" ]; then
 else
   DOCKER_HOST_IP="127.0.0.1"
 fi
+echo "DOCKER_HOST_IP: $DOCKER_HOST_IP"
 
 
 # Run containers
